@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "./pb";
+
+message {{.Model}}Params {
+    {{.struct}}
+}
+
+service {{.Model}} {
+    rpc Insert ({{.Model}}Params) returns ({{.Model}}Params);
+    rpc FindOneByID (int64) returns ({{.Model}}Params);
+    rpc Update ({{.Model}}Params) returns ();
+    rpc Delete (int64) returns ();
+}
+
+

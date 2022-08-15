@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "./pb";
+
+message TestParams {
+    string name = 1;
+	int age = 2;
+}
+
+service Test {
+    rpc Insert (TestParams) returns (TestParams);
+    rpc FindOneByID (int64) returns (TestParams);
+    rpc Update (TestParams) returns ();
+    rpc Delete (int64) returns ();
+}
+
+
