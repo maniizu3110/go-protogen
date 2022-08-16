@@ -2,17 +2,20 @@ syntax = "proto3";
 
 package pb;
 
-option go_package = "./pb";
+option go_package = "./{{.model}}";
 
 message {{.Model}}Params {
-    {{.struct}}
+{{.struct}}
+}
+message ID {
+    int64 id = 1
 }
 
 service {{.Model}} {
     rpc Insert ({{.Model}}Params) returns ({{.Model}}Params);
     rpc FindOneByID (int64) returns ({{.Model}}Params);
-    rpc Update ({{.Model}}Params) returns ();
-    rpc Delete (int64) returns ();
+    rpc Update ({{.Model}}Params) returns (google.protobuf.Empty);
+    rpc Delete (int64) returns (google.protobuf.Empty);
 }
 
 

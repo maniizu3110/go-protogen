@@ -22,10 +22,10 @@ func GenerateProtoFile(inputFilePath string, outputPath string) error {
 	fileName := strings.Split(inputFilePath, "/")[len(strings.Split(inputFilePath, "/"))-1]
 	model := strings.Split(fileName, ".")[0]
 	structFields := paramCreatorForProto(inputFilePath)
-	fmt.Println(structFields)
 
 	params := map[string]any{
 		"Model":  strcase.ToCamel(model),
+		"model":  strcase.ToLowerCamel(model),
 		"struct": structFields,
 	}
 
@@ -79,6 +79,5 @@ func paramCreatorForProto(filePath string) string {
 		ans += fmt.Sprintf("	%s %s = %d;\n", typ, tag, cnt)
 		cnt++
 	}
-	fmt.Printf("ans%s\n", ans)
 	return ans
 }
